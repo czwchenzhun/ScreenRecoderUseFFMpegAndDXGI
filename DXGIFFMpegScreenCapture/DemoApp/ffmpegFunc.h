@@ -28,8 +28,8 @@ public:
 	MyFFMpegFunc() {}
 	void ffmpeg_encoder_set_frame_yuv_from_rgb(uint8_t *rgb);
 	void ffmpeg_encoder_set_frame_yuv_from_bgra(uint8_t *bgra);
-	void ffmpeg_encoder_start(const char *filename, int codec_id, int fps, int width, int height);
-	void ffmpeg_encoder_start(const char *filename, char *codec_name, int fps, int width, int height);
+	void ffmpeg_encoder_start(const char *filename, int codec_id, int width, int height, int fps, int bitrate);
+	void ffmpeg_encoder_start(const char *filename, const char *codec_name, int width, int height, int fps, int bitrate);
 	void ffmpeg_encoder_finish(void);
 	void ffmpeg_encoder_encode_frame_rgb(uint8_t *rgb);
 	void ffmpeg_encoder_encode_frame_bgra(uint8_t *bgra);

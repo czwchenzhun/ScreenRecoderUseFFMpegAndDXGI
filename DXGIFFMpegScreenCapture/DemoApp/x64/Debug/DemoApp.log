@@ -1,3 +1,9 @@
-﻿  LINK : 缺少程序数据库 C:\Users\chenzhiwen\Desktop\DXGIFFMpegScreenCapture\x64\Debug\DemoApp.pdb；正在执行完全链接
-  DemoApp.vcxproj -> C:\Users\chenzhiwen\Desktop\DXGIFFMpegScreenCapture\x64\Debug\DemoApp.exe
-  DemoApp.vcxproj -> C:\Users\chenzhiwen\Desktop\DXGIFFMpegScreenCapture\x64\Debug\DemoApp.pdb (Partial PDB)
+﻿  main.cpp
+d:\ffmpeg\include\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+c:\users\chenzhiwen\documents\github\screenrecoderuseffmpeganddxgi\dxgiffmpegscreencapture\demoapp\main.cpp(38): warning C4996: 'av_register_all': 被声明为已否决
+  d:\ffmpeg\include\libavformat\avformat.h(2050): note: 参见“av_register_all”的声明
+  Duplication.cpp
+d:\ffmpeg\include\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  正在生成代码...
+  DemoApp.vcxproj -> C:\Users\chenzhiwen\Documents\GitHub\ScreenRecoderUseFFMpegAndDXGI\DXGIFFMpegScreenCapture\x64\Debug\DemoApp.exe
+  DemoApp.vcxproj -> C:\Users\chenzhiwen\Documents\GitHub\ScreenRecoderUseFFMpegAndDXGI\DXGIFFMpegScreenCapture\x64\Debug\DemoApp.pdb (Partial PDB)

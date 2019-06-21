@@ -21,7 +21,7 @@ void MyFFMpegFunc::ffmpeg_encoder_set_frame_yuv_from_bgra(uint8_t *bgra) {
 }
 
 /* Allocate resources and write header data to the output file. */
-void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, int codec_id, int fps, int width, int height) {
+void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, int codec_id, int width, int height, int fps, int bitrate) {
 	AVCodec *codec;
 	int ret;
 
@@ -36,7 +36,7 @@ void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, int codec_id, int 
 		exit(1);
 	}
 
-	c->bit_rate = 2000000;
+	c->bit_rate = bitrate;
 	c->width = width;
 	c->height = height;
 	c->time_base.num = 1;
@@ -69,7 +69,7 @@ void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, int codec_id, int 
 	}
 }
 
-void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, char *codec_name, int fps, int width, int height) {
+void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, const char *codec_name, int width, int height, int fps, int bitrate) {
 	AVCodec *codec;
 	int ret;
 
@@ -84,7 +84,7 @@ void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, char *codec_name, 
 		exit(1);
 	}
 
-	c->bit_rate = 2500000;
+	c->bit_rate = bitrate;
 	c->width = width;
 	c->height = height;
 	c->time_base.num = 1;
@@ -94,6 +94,7 @@ void MyFFMpegFunc::ffmpeg_encoder_start(const char *filename, char *codec_name, 
 	//c->pix_fmt = AV_PIX_FMT_YUV420P;
 	
 	av_opt_set(c->priv_data, "preset", "slow", 0);
+
 	if (avcodec_open2(c, codec, NULL) < 0) {
 		fprintf(stderr, "Could not open codec\n");
 		exit(1);

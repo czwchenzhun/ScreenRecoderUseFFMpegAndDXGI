@@ -22,7 +22,6 @@
     <ClCompile Include="Duplication.cpp" />
     <ClCompile Include="ffmpegFunc.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="源.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonTypes.h" />

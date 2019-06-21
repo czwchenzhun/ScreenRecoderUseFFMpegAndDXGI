@@ -35,42 +35,65 @@ int main()
 		std::cout << "init duplication failed" << std::endl;
 		return 0;
 	}
+	av_register_all();
 
-	int fps = 20;
-	int width, height;
-	UCHAR* buffer = nullptr;
+	int fps = 18;
+	int bitrate = 2000000;
+	int width = 1920;
+	int height = 1080;
+	const char* outputFileName = "h264qsv.h264";
+	const char* encoderName = "h264_qsv";
+	BYTE* buffer = nullptr;
+	BYTE* backupBuffer = nullptr;
+
 	clock_t start, end;
 	float duration;
 	start = clock();
 	int counter = 0;
 	int time = 60;
-	char fileName[10];
-	av_register_all();
+
 	MyFFMpegFunc ffmpegFunc;
-	ffmpegFunc.ffmpeg_encoder_start("h264qsv.h264", "h264_qsv", 18, 1920, 1080);
+	ffmpegFunc.ffmpeg_encoder_start(outputFileName, encoderName, width, height, fps, bitrate);
+
 	while (true)
 	{
 		end = clock();
 		duration = (float)(end - start) / (float)CLOCKS_PER_SEC;
 		if (duration > time)
 			break;
+
 		if (dup.GetFrame())
 		{
-			if (dup.copyFrameDataToBuffer1(&buffer, width, height))
+			if (dup.copyFrameDataToBuffer(&buffer, width, height))
 			{
+				
 				dup.DoneWithFrame();
-
 				ffmpegFunc.frame->pts = counter;
 				ffmpegFunc.ffmpeg_encoder_encode_frame_bgra(buffer);
 
-				delete buffer;
+				delete backupBuffer;
+				backupBuffer = buffer;
 				buffer = nullptr;
 				counter++;
 			}
 			else
-				int a = 1;
+			{
+				fprintf(stderr, "Get frame failed!\n");
+				getchar();
+				return 0;
+			}
+		}
+		else
+		{
+			ffmpegFunc.frame->pts = counter;
+			ffmpegFunc.ffmpeg_encoder_encode_frame_bgra(backupBuffer);
+			counter++;
 		}
 	}
+	if (buffer)
+		delete buffer;
+	if (backupBuffer)
+		delete buffer;
 	ffmpegFunc.ffmpeg_encoder_finish();
 	cout << "FPS:" << (float)counter/(float)time << endl;
 	getchar();
